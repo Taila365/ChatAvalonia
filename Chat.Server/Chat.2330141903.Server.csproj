@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-Chat.Server-d1f38bba-d63d-4d95-96b1-8f56c71c52cb</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Furion" Version="4.9.8.96" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="TouchSocket.Http" Version="4.2.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Chat.Application\Chat.2330141903.Application.csproj" />
+  </ItemGroup>
+</Project>

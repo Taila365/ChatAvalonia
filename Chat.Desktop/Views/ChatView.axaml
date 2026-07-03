@@ -1,0 +1,124 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="using:Chat.Desktop.ViewModels"
+             xmlns:u="https://irihi.tech/ursa"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Chat.Desktop.ChatView"
+             x:DataType="vm:ChatViewModel">
+  
+    <Border>
+		<SplitView
+            DisplayMode="Inline"
+            IsPaneOpen="True"
+            OpenPaneLength="220"
+            PanePlacement="Left"
+            UseLightDismissOverlayMode="True">
+            
+            <!-- ✅ 在线用户列表 -->
+            <SplitView.Pane>
+                <Border Padding="15">
+                    <StackPanel Spacing="10">
+                        <TextBlock 
+                            Text="在线用户" 
+                            FontWeight="Bold" 
+                            FontSize="16"
+                            Margin="0 0 0 10"/>
+                        
+                        <ListBox 
+                            ItemsSource="{Binding OnlineUsers}"
+                            DoubleTapped="OnlineUser_DoubleTapped">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <DockPanel Margin="0 5">
+                                        <Ellipse 
+                                            DockPanel.Dock="Left" 
+                                            Width="8" 
+                                            Height="8" 
+                                            Fill="Green" 
+                                            Margin="0 0 8 0"
+                                            VerticalAlignment="Center"/>
+                                        <TextBlock 
+                                            Text="{Binding}" 
+                                            VerticalAlignment="Center"
+                                            FontSize="14"/>
+                                    </DockPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </Border>
+            </SplitView.Pane>
+
+            <Grid RowDefinitions="*,Auto">
+                <ScrollViewer 
+                    Grid.Row="0" 
+                    Margin="10 30 10 0"
+                    VerticalScrollBarVisibility="Auto" 
+                    HorizontalScrollBarVisibility="Auto" 
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Stretch"
+                    AllowAutoHide="False">
+                    <ItemsControl ItemsSource="{Binding ChatLists}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <DockPanel 
+                                    Margin="0 0 0 10" 
+                                    HorizontalSpacing="10"
+                                    HorizontalAlignment="{Binding TextAlignment}">
+                                    
+                                    <!-- ✅ 系统消息隐藏头像 -->
+                                    <PathIcon 
+                                        DockPanel.Dock="{Binding TextDock}"
+                                        Classes="Large" 
+                                        Data="{StaticResource SemiIconUser}"
+                                        IsVisible="{Binding IsNotSystemMessage}" />
+                                    
+                                    <StackPanel Orientation="Vertical">
+                                        <DockPanel HorizontalSpacing="10">
+                                            <TextBlock 
+                                                DockPanel.Dock="{Binding TextDock}"
+                                                Text="{Binding NickName}"
+                                                IsVisible="{Binding IsNotSystemMessage}" />
+                                            <u:DateDisplay
+                                                StringFormat="HH:mm"
+                                                IsSelectable="False"
+                                                Value="{Binding SendTime}"
+                                                IsVisible="{Binding IsNotSystemMessage}" />
+                                        </DockPanel>
+                                        <SelectableTextBlock 
+                                            HorizontalAlignment="{Binding TextAlignment}"
+                                            Text="{Binding Content}" />
+                                    </StackPanel>
+                                    
+                                </DockPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <DockPanel 
+                    Grid.Row="1" 
+                    HorizontalSpacing="5"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Bottom"
+                    Margin="10 10">
+                    <u:IconButton 
+                        DockPanel.Dock="Right"
+                        Width="150"
+                        VerticalAlignment="Stretch"
+                        Icon="{StaticResource SemiIconSend}" 
+                        Content="发送" 
+                        Command="{Binding SendClickCommand}" />
+                    <TextBox 
+                        Classes="TextArea ClearButton"
+                        HorizontalAlignment="Stretch"
+                        PlaceholderText="想说点什么"
+                        Text="{Binding SendContent}" />
+                </DockPanel>
+            </Grid>
+        </SplitView>
+    </Border>
+
+</UserControl>

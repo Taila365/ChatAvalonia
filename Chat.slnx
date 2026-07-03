@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Chat.Application/Chat.2330141903.Application.csproj" />
+  <Project Path="Chat.Core/Chat.2330141903.Core.csproj" />
+  <Project Path="Chat.Desktop/Chat.2330141903.Desktop.csproj" />
+  <Project Path="Chat.Server/Chat.2330141903.Server.csproj" />
+</Solution>

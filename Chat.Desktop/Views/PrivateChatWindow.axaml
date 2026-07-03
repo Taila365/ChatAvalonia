@@ -1,0 +1,80 @@
+<u:UrsaWindow 
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:vm="using:Chat.Desktop.ViewModels"
+    xmlns:u="https://irihi.tech/ursa"
+    x:Class="Chat.Desktop.Views.PrivateChatWindow"
+    x:DataType="vm:PrivateChatViewModel"
+    Title="与 {Binding TargetUserName} 私聊"
+    Width="500" Height="600">
+
+    <Design.DataContext>
+        <vm:PrivateChatViewModel />
+    </Design.DataContext>
+
+    <Grid RowDefinitions="*,Auto">
+        <ScrollViewer 
+            Grid.Row="0" 
+            Margin="10 10 10 0"
+            VerticalScrollBarVisibility="Auto" 
+            HorizontalScrollBarVisibility="Auto"
+            AllowAutoHide="False">
+            <ItemsControl ItemsSource="{Binding ChatLists}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <DockPanel 
+                            Margin="0 0 0 10" 
+                            HorizontalSpacing="10"
+                            HorizontalAlignment="{Binding TextAlignment}">
+                            
+                            <PathIcon 
+                                DockPanel.Dock="{Binding TextDock}"
+                                Classes="Large" 
+                                Data="{StaticResource SemiIconUser}"
+                                IsVisible="{Binding IsNotSystemMessage}" />
+                            
+                            <StackPanel Orientation="Vertical">
+                                <DockPanel HorizontalSpacing="10">
+                                    <TextBlock 
+                                        DockPanel.Dock="{Binding TextDock}"
+                                        Text="{Binding NickName}"
+                                        IsVisible="{Binding IsNotSystemMessage}" />
+                                    <u:DateDisplay
+                                        StringFormat="HH:mm"
+                                        IsSelectable="False"
+                                        Value="{Binding SendTime}"
+                                        IsVisible="{Binding IsNotSystemMessage}" />
+                                </DockPanel>
+                                <SelectableTextBlock 
+                                    HorizontalAlignment="{Binding TextAlignment}"
+                                    Text="{Binding Content}" />
+                            </StackPanel>
+                            
+                        </DockPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <DockPanel 
+            Grid.Row="1" 
+            HorizontalSpacing="5"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom"
+            Margin="10 10">
+            <u:IconButton 
+                DockPanel.Dock="Right"
+                Width="100"
+                VerticalAlignment="Stretch"
+                Icon="{StaticResource SemiIconSend}" 
+                Content="发送" 
+                Command="{Binding SendClickCommand}" />
+            <TextBox 
+                Classes="TextArea ClearButton"
+                HorizontalAlignment="Stretch"
+                PlaceholderText="说点什么..."
+                Text="{Binding SendContent}" />
+        </DockPanel>
+    </Grid>
+
+</u:UrsaWindow>

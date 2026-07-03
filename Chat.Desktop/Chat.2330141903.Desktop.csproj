@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net10.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+
+		<!-- ✅ 加上这行，打包VC++运行库 -->
+		<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+
+	</PropertyGroup>
+
+	<ItemGroup>
+		<AvaloniaResource Include="Assets\**" />
+		<None Remove="appsettings.json" />
+		<Content Include="appsettings.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Folder Include="Properties\PublishProfiles\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="12.0.4" />
+		<PackageReference Include="Avalonia.Desktop" Version="12.0.4" />
+		<PackageReference Include="Avalonia.Themes.Fluent" Version="12.0.4" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="12.0.4" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+		<PackageReference Include="Furion" Version="4.9.8.96" />
+		<PackageReference Include="Irihi.Ursa" Version="2.0.0" />
+		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="2.0.0" />
+		<PackageReference Include="Semi.Avalonia" Version="12.0.3" />
+		<PackageReference Include="Semi.Avalonia.DataGrid" Version="12.0.0" />
+		<PackageReference Include="SqlSugar" Version="5.1.4.207" />
+		<PackageReference Include="TouchSocket.Http" Version="4.2.13" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Chat.Application\Chat.2330141903.Application.csproj" />
+		<ProjectReference Include="..\Chat.Core\Chat.2330141903.Core.csproj" />
+	</ItemGroup>
+</Project>
