@@ -55,6 +55,8 @@ Visual Studio 2022 / Rider（推荐）
 打开 聊天.桌面 项目
 修改 appsettings.json 中的 ServerIp、HttpPort、WebSocketPort，指向已启动的后端服务地址
 编译并启动客户端，注册账号后即可登录进入聊天
+
+
 ⚙️ 关键配置说明
 客户端配置（聊天.桌面/appsettings.json）
 json
@@ -76,6 +78,8 @@ json
     "WebSocket": 8082
   }
 }
+
+
 📝 后续规划
  群聊功能支持
  文件、图片消息传输
